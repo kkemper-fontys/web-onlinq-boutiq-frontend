@@ -39,12 +39,12 @@ h1 {
     line-height: 1.5;
     margin: 0 0 15px 0;
     transition: $transition-options;
-    //
-    //@include susy-breakpoint($m, $desk) {
-    //    font-size: 2.66rem;
-    //    line-height: 1.33;
-    //    margin: 0 0 30px 0;
-    //}
+
+    @include breakpoint($breakpoint-m) {
+        font-size: 2.66rem;
+        line-height: 1.33;
+        margin: 0 0 30px 0;
+    }
 }
 
 h2 {
@@ -56,11 +56,11 @@ h2 {
     margin: 0 0 15px 0;
     transition: $transition-options;
 
-    //@include susy-breakpoint($m, $desk) {
-    //    font-size: 2.66rem;
-    //    line-height: 1.33;
-    //    margin: 0 0 30px 0;
-    //}
+    @include breakpoint($breakpoint-m) {
+        font-size: 2.66rem;
+        line-height: 1.33;
+        margin: 0 0 30px 0;
+    }
 }
 
 
@@ -73,9 +73,9 @@ h3 {
     line-height: normal;
     transition: $transition-options;
 
-    //@include susy-breakpoint($m, $desk) {
-    //    font-size: 1.25rem;
-    //}
+    @include breakpoint($breakpoint-m) {
+        font-size: 1.25rem;
+    }
 }
 
 h4 {
@@ -85,9 +85,9 @@ h4 {
     line-height: normal;
     color: $secondary;
 
-    //@include susy-breakpoint($m, $desk){
-    //    font-size: 1.11rem;
-    //}
+    @include breakpoint($breakpoint-m) {
+        font-size: 1.11rem;
+    }
 }
 
 p {
@@ -96,10 +96,10 @@ p {
     font-weight: 300;
     line-height: 1.86;
 
-    //@include susy-breakpoint($m, $desk) {
-    //    font-size: 1rem;
-    //    line-height: 1.78;
-    //}
+    @include breakpoint($breakpoint-m) {
+        font-size: 1rem;
+        line-height: 1.78;
+    }
 
     a {
         color: #015088 !important;
@@ -114,10 +114,10 @@ ul, li {
     line-height: 1.86;
     list-style-position: inside;
 
-    //@include susy-breakpoint($m, $desk) {
-    //    font-size: 1rem;
-    //    line-height: 1.78;
-    //}
+    @include breakpoint($breakpoint-m) {
+        font-size: 1rem;
+        line-height: 1.78;
+    }
 }
 
 .container {
@@ -131,9 +131,9 @@ section {
     padding: $section-padding-mobile;
     overflow: hidden;
 
-    //@include susy-breakpoint($m, $desk) {
-    //    padding: $section-padding;
-    //}
+    @include breakpoint($breakpoint-m) {
+        padding: $section-padding;
+    }
 }
 
 a {
@@ -156,10 +156,10 @@ a {
     display: inline-block;
     color: $white;
 
-    //@include susy-breakpoint($m, $desk) {
-    //    padding: .875rem 4.6875rem 0.9375rem 4.6875rem !important;
-    //    font-size: 1rem;
-    //}
+    @include breakpoint($breakpoint-m) {
+        padding: .875rem 4.6875rem 0.9375rem 4.6875rem !important;
+        font-size: 1rem;
+    }
 
     &:hover {
         background: $primary;

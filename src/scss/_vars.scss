@@ -176,6 +176,13 @@ $section-padding:                   75px 0;
 // Mobile settings
 $nav-breakpoint:                    (min-width: 980px);
 $nav-breakpoint-max:                (min-width: 385px);
+
+$breakpoint-xs:                     (min-width: 480px);
+$breakpoint-s:                      (min-width: 576px);
+$breakpoint-m:                      (min-width: 640px);
+$breakpoint-l:                      (min-width: 992px);
+$breakpoint-xl:                     (min-width: 1200px);
+
 $menu-toggle-width:			        35px;
 $menu-toggle-margin:			    20px;
 $menu-width:					    300px;
