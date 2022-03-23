@@ -1,0 +1,172 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+html {
+    font-size: $font-size;
+}
+
+body {
+    position: relative;
+    background-color: $white;
+    font-family: $font-primary;
+    font-size: 1rem;
+    line-height: 1.6rem;
+    font-weight: normal;
+    color: $gray-400;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+
+    > * {
+        flex: 0 0 auto;
+    }
+}
+
+h1 {
+    font-family: $font-primary;
+    font-size: 1.11rem;
+    font-weight: bold;
+    color: $gray-400;
+    line-height: 1.5;
+    margin: 0 0 15px 0;
+    transition: $transition-options;
+    //
+    //@include susy-breakpoint($m, $desk) {
+    //    font-size: 2.66rem;
+    //    line-height: 1.33;
+    //    margin: 0 0 30px 0;
+    //}
+}
+
+h2 {
+    font-family: $font-primary;
+    font-size: 1.11rem;
+    font-weight: bold;
+    color: $gray-400;
+    line-height: 1.5;
+    margin: 0 0 15px 0;
+    transition: $transition-options;
+
+    //@include susy-breakpoint($m, $desk) {
+    //    font-size: 2.66rem;
+    //    line-height: 1.33;
+    //    margin: 0 0 30px 0;
+    //}
+}
+
+
+h3 {
+    font-family: $font-primary;
+    font-size: 0.78rem;
+    font-weight: 800;
+    color: $secondary;
+    text-transform: uppercase;
+    line-height: normal;
+    transition: $transition-options;
+
+    //@include susy-breakpoint($m, $desk) {
+    //    font-size: 1.25rem;
+    //}
+}
+
+h4 {
+    font-family: $font-primary;
+    font-size: 0.78rem;
+    font-weight: 800;
+    line-height: normal;
+    color: $secondary;
+
+    //@include susy-breakpoint($m, $desk){
+    //    font-size: 1.11rem;
+    //}
+}
+
+p {
+    font-family: $font-secondary;
+    font-size: 0.788rem;
+    font-weight: 300;
+    line-height: 1.86;
+
+    //@include susy-breakpoint($m, $desk) {
+    //    font-size: 1rem;
+    //    line-height: 1.78;
+    //}
+
+    a {
+        color: #015088 !important;
+        text-decoration: underline !important;
+    }
+}
+
+ul, li {
+    font-family: $font-secondary;
+    font-size: 0.788rem;
+    font-weight: 300;
+    line-height: 1.86;
+    list-style-position: inside;
+
+    //@include susy-breakpoint($m, $desk) {
+    //    font-size: 1rem;
+    //    line-height: 1.78;
+    //}
+}
+
+.container {
+    position: relative;
+    max-width: calc(1400px + 8%);
+    margin: 0 auto;
+    padding: 0 4%;
+}
+
+section {
+    padding: $section-padding-mobile;
+    overflow: hidden;
+
+    //@include susy-breakpoint($m, $desk) {
+    //    padding: $section-padding;
+    //}
+}
+
+a {
+    color: $primary;
+    transition: $transition-options;
+    text-decoration: none;
+
+    &:hover {
+        color: mix($white, $primary, 20%);
+    }
+}
+
+.btn, button {
+    padding: .75rem 3.125rem !important;
+    font-size: 0.78rem;
+    font-weight: bold;
+    border: 0;
+    background: $secondary;
+    cursor: pointer;
+    display: inline-block;
+    color: $white;
+
+    //@include susy-breakpoint($m, $desk) {
+    //    padding: .875rem 4.6875rem 0.9375rem 4.6875rem !important;
+    //    font-size: 1rem;
+    //}
+
+    &:hover {
+        background: $primary;
+        color: $white;
+    }
+
+    &::after {
+        display: none;
+    }
+}
