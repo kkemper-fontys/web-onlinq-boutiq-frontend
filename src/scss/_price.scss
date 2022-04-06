@@ -1,0 +1,20 @@
+.price {
+  margin-bottom: 50px;
+
+  &-range {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: space-between;
+
+    .currency {
+      padding-left:30px;
+      max-width: 110px;
+    }
+
+    .currency-symbol {
+      position:absolute;
+      padding: 8px 15px;
+    }
+  }
+}

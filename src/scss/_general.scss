@@ -287,3 +287,12 @@ a {
         }
     }
 }
+
+input[type=text], input[type=number] {
+    border-radius: 50px;
+    padding: 10px;
+    border: 1px solid $gray-100;
+    font-size: 1rem;
+    font-family: $font-primary;
+    background: transparent;
+}
