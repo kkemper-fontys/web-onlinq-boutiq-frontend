@@ -1,0 +1,183 @@
+$font-path:                         '../fonts';
+
+$webfonts: (
+    glober: (
+        font-family: 'Glober',
+        prefix: 'glober_',
+        suffix: '',
+        infixes: (
+            'thin': (
+                font-weight: 100,
+                font-style: normal
+            ),
+            'thin_italic': (
+                font-weight: 100,
+                font-style: italic
+            ),
+
+            'light': (
+                font-weight: 300,
+                font-style: normal
+            ),
+            'light_italic': (
+                font-weight: 300,
+                font-style: italic
+            ),
+
+            'regular': (
+                font-weight: normal,
+                font-style: normal
+            ),
+            'regular_italic': (
+                font-weight: normal,
+                font-style: italic
+            ),
+
+            'semibold': (
+                font-weight: 600,
+                font-style: normal
+            ),
+            'semibold_italic': (
+                font-weight: 600,
+                font-style: italic
+            ),
+
+            'bold': (
+                font-weight: bold,
+                font-style: normal
+            ),
+            'bold_italic': (
+                font-weight: bold,
+                font-style: italic
+            ),
+
+            'xbold': (
+                font-weight: 800,
+                font-style: normal
+            ),
+            'xbold_italic': (
+                font-weight: 800,
+                font-style: italic
+            ),
+
+            'black': (
+                font-weight: 900,
+                font-style: normal
+            ),
+            'black_italic': (
+                font-weight: 900,
+                font-style: italic
+            ),
+        )
+    ),
+    raleway: (
+        font-family: 'Raleway',
+        prefix: 'raleway-',
+        suffix: '',
+        infixes: (
+                'thin': (
+                        font-weight: 100,
+                        font-style: normal
+                ),
+                'thinitalic': (
+                        font-weight: 100,
+                        font-style: italic
+                ),
+
+                'extralight': (
+                        font-weight: 200,
+                        font-style: normal
+                ),
+                'extralightitalic': (
+                        font-weight: 200,
+                        font-style: italic
+                ),
+
+                'light': (
+                        font-weight: 300,
+                        font-style: normal
+                ),
+                'lightitalic': (
+                        font-weight: 300,
+                        font-style: italic
+                ),
+
+                'regular': (
+                        font-weight: normal,
+                        font-style: normal
+                ),
+                'italic': (
+                        font-weight: normal,
+                        font-style: italic
+                ),
+
+                'medium': (
+                        font-weight: 500,
+                        font-style: normal
+                ),
+                'mediumitalic': (
+                        font-weight: 500,
+                        font-style: italic
+                ),
+
+                'semibold': (
+                        font-weight: 600,
+                        font-style: normal
+                ),
+                'semibolditalic': (
+                        font-weight: 600,
+                        font-style: italic
+                ),
+
+                'bold': (
+                        font-weight: bold,
+                        font-style: normal
+                ),
+                'bolditalic': (
+                        font-weight: bold,
+                        font-style: italic
+                ),
+
+                'extrabold': (
+                        font-weight: 800,
+                        font-style: normal
+                ),
+                'extrabolditalic': (
+                        font-weight: 800,
+                        font-style: italic
+                ),
+
+                'black': (
+                        font-weight: 900,
+                        font-style: normal
+                ),
+                'blackitalic': (
+                        font-weight: 900,
+                        font-style: italic
+                ),
+        )
+),
+);
+
+@function map-deep-get($map, $keys...) {
+  @each $key in $keys {
+    $map: map-get($map, $key);
+  }
+  @return $map;
+}
+
+@mixin webfonts($webfonts) {
+  @each $key, $webfont in $webfonts {
+    $infixes: map-deep-get($webfont, 'infixes');
+
+    @each $infix, $values in $infixes {
+      @font-face {
+        font-family: map-get($webfont, 'font-family');
+        font-display: swap;
+        src: url('#{$font-path}/#{map-get($webfont, 'prefix')}#{$infix}#{map-get($webfont, 'suffix')}.woff2') format('woff2');
+        font-weight: map-get($values, 'font-weight');
+        font-style: map-get($values, 'font-style');
+      }
+    }
+  }
+}

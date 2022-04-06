@@ -16,115 +16,196 @@ body {
     position: relative;
     background-color: $white;
     font-family: $font-primary;
-    font-size: 1rem;
-    line-height: 1.6rem;
+    font-size: .875rem;
+    line-height: 1.625rem;
     font-weight: normal;
-    color: $gray-400;
+    color: $gray-300;
     display: flex;
     flex-direction: column;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden;
 
+    @include breakpoint($breakpoint-m) {
+        font-size: 1rem;
+        line-height: 1.75rem;
+    }
+
     > * {
         flex: 0 0 auto;
     }
 }
 
-h1 {
-    font-family: $font-primary;
-    font-size: 1.11rem;
-    font-weight: bold;
-    color: $gray-400;
-    line-height: 1.5;
+%sibling-heading {
+    + {
+        p {
+            margin-top: 10px;
+        }
+
+        ul {
+            margin-top: 10px;
+        }
+
+        ol {
+            margin-top: 10px;
+        }
+
+        h2, h3, h4 {
+            margin-top: 20px;
+        }
+
+        .btn {
+            margin-top: 30px;
+
+            @include breakpoint($breakpoint-m) {
+                margin-top: 50px;
+            }
+        }
+    }
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: $font-secondary;
     margin: 0 0 15px 0;
+    color: $black;
     transition: $transition-options;
+    font-weight: bold;
 
     @include breakpoint($breakpoint-m) {
-        font-size: 2.66rem;
-        line-height: 1.33;
-        margin: 0 0 30px 0;
+        margin: 0 0 20px 0;
+    }
+}
+
+h1 {
+    //TODO change for mobile
+
+    font-size: 1.11rem;
+    line-height: 1.5;
+
+    @include breakpoint($breakpoint-m) {
+        font-size: 3rem;
+        line-height: 3.25rem;
     }
 }
 
 h2 {
-    font-family: $font-primary;
+    //TODO change for mobile
+
     font-size: 1.11rem;
-    font-weight: bold;
-    color: $gray-400;
     line-height: 1.5;
-    margin: 0 0 15px 0;
-    transition: $transition-options;
 
     @include breakpoint($breakpoint-m) {
-        font-size: 2.66rem;
-        line-height: 1.33;
-        margin: 0 0 30px 0;
+        font-size: 2.5rem;
+        line-height: 3rem;
     }
 }
 
-
 h3 {
-    font-family: $font-primary;
+    //TODO change for mobile
+
     font-size: 0.78rem;
-    font-weight: 800;
-    color: $secondary;
-    text-transform: uppercase;
+    font-weight: 300;
     line-height: normal;
-    transition: $transition-options;
 
     @include breakpoint($breakpoint-m) {
-        font-size: 1.25rem;
+        font-size: 1.875rem;
+        line-height: 2.25rem;
     }
 }
 
 h4 {
-    font-family: $font-primary;
+    //TODO change for mobile
+
     font-size: 0.78rem;
-    font-weight: 800;
-    line-height: normal;
-    color: $secondary;
+    line-height: 2rem;
 
     @include breakpoint($breakpoint-m) {
-        font-size: 1.11rem;
+        font-size: 1.5rem;
+        line-height: 2rem;
+    }
+}
+
+h5 {
+    //TODO change for mobile
+
+    font-size: 0.78rem;
+    line-height: normal;
+    color: $gray-400;
+    margin: 0;
+
+    @include breakpoint($breakpoint-m) {
+        font-size: 1.125rem;
+        line-height: 1.375rem;
     }
 }
 
 p {
-    font-family: $font-secondary;
-    font-size: 0.788rem;
-    font-weight: 300;
-    line-height: 1.86;
+    max-width: 100%;
+    letter-spacing: normal;
+    @extend %sibling-heading;
+}
 
-    @include breakpoint($breakpoint-m) {
-        font-size: 1rem;
-        line-height: 1.78;
-    }
+ul, ol {
+    list-style: none;
 
-    a {
-        color: #015088 !important;
-        text-decoration: underline !important;
+    li {
+        position: relative;
+
+        &::before {
+            top: 50%;
+            position: absolute;
+            left: -16px;
+            transform: translateY(-50%);
+        }
     }
 }
 
-ul, li {
-    font-family: $font-secondary;
-    font-size: 0.788rem;
-    font-weight: 300;
-    line-height: 1.86;
-    list-style-position: inside;
+ul {
 
-    @include breakpoint($breakpoint-m) {
-        font-size: 1rem;
-        line-height: 1.78;
+    &:not(.exclude):not(.slick-dots) {
+        list-style: none;
+
+        li {
+            margin-left: 20px;
+            padding-left: 15px;
+
+            &:before {
+                font-size: 0.5rem;
+                @extend %fa-icon;
+                @extend .fas;
+                content: fa-content($fa-var-circle);
+                color: $primary;
+            }
+        }
+
+        @extend %sibling-heading;
     }
 }
+
+ol {
+    counter-reset: counter-number;
+
+    li  {
+        margin-left: 20px;
+        padding-left: 15px;
+        counter-increment: counter-number;
+
+        &::before {
+            content: counter(counter-number) ". ";
+            font-size: 1rem;
+            color: $primary;
+        }
+    }
+
+    @extend %sibling-heading;
+}
+
 
 .container {
     position: relative;
-    max-width: calc(1400px + 8%);
+    max-width: $container;
     margin: 0 auto;
-    padding: 0 4%;
+    padding: $container-padding;
 }
 
 section {
@@ -147,26 +228,89 @@ a {
 }
 
 .btn, button {
-    padding: .75rem 3.125rem !important;
-    font-size: 0.78rem;
+    //TODO: Change for mobile
+
+    padding: .625rem  1.25rem !important;
+    font-size: 0.75rem;
+    font-family: $font-secondary;
     font-weight: bold;
+    line-height: 1rem;
     border: 0;
-    background: $secondary;
+    background: $primary;
     cursor: pointer;
     display: inline-block;
     color: $white;
+    border-radius: 50px;
+    transition: $transition-options;
 
     @include breakpoint($breakpoint-m) {
-        padding: .875rem 4.6875rem 0.9375rem 4.6875rem !important;
+        padding: 1rem 3.125rem!important;
         font-size: 1rem;
+        line-height: 1rem;
     }
 
     &:hover {
-        background: $primary;
-        color: $white;
+        //TODO: wachten op baaaaarno
+        background: $secondary;
+        color: $black;
     }
 
     &::after {
         display: none;
+    }
+}
+
+.tag {
+    padding: .625rem  1.25rem !important;
+    font-size: 0.75rem;
+    font-family: $font-secondary;
+    font-weight: bold;
+    border: 1px solid $gray-100;
+    cursor: pointer;
+    display: inline-block;
+    color: $black;
+    line-height: 1rem;
+    border-radius: 50px;
+    transition: $transition-options;
+    background: transparent;
+
+    @include breakpoint($breakpoint-m) {
+        padding: .75rem 1.875rem!important;
+        font-size: .875rem;
+        line-height: 1rem;
+    }
+
+    &:hover {
+        background: $secondary;
+        color: $black;
+        border-color: $secondary;
+    }
+}
+
+.badge {
+    padding: .625rem  1.25rem !important;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-family: $font-primary;
+    display: inline-block;
+    color: $white;
+    border-radius: 50px;
+    background: $tertiary;
+
+    @include breakpoint($breakpoint-m) {
+        padding: .625rem 1.25rem!important;
+        font-size: .75rem;
+        line-height: .875rem;
+    }
+
+    &--big {
+        padding: .625rem  1.25rem !important;
+        font-size: 0.75rem;
+
+        @include breakpoint($breakpoint-m) {
+            padding: .625rem 1.875rem!important;
+            font-size: 1rem;
+            line-height: 1rem;
+        }
     }
 }
