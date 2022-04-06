@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './scss/app.scss';
+import {useFetch} from "./hooks/use-fetch";
+import {useState} from "react";
 
 function App() {
+  const {fetchData, loading} = useFetch();
+  const [tags, setTags] = useState([]);
+  const clickTagHandler = async (id) => {
+    const data = await fetchData(`tags/${id}`);
+    console.log(data.description);
+  }
+
+  const clickHandler = async () => {
+    const data = await fetchData('tags');
+    setTags(data);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {tags.map((tag) => (
+        <button key={tag.id} onClick={() => clickTagHandler(tag.id)}>Click {tag.id}!</button>
+      ))}
+      <button onClick={() => clickHandler()}>Click me!</button>
     </div>
   );
 }
