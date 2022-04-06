@@ -260,33 +260,6 @@ a {
     }
 }
 
-.tag {
-    padding: .625rem  1.25rem !important;
-    font-size: 0.75rem;
-    font-family: $font-secondary;
-    font-weight: bold;
-    border: 1px solid $gray-100;
-    cursor: pointer;
-    display: inline-block;
-    color: $black;
-    line-height: 1rem;
-    border-radius: 50px;
-    transition: $transition-options;
-    background: transparent;
-
-    @include breakpoint($breakpoint-m) {
-        padding: .75rem 1.875rem!important;
-        font-size: .875rem;
-        line-height: 1rem;
-    }
-
-    &:hover {
-        background: $secondary;
-        color: $black;
-        border-color: $secondary;
-    }
-}
-
 .badge {
     padding: .625rem  1.25rem !important;
     font-size: 0.75rem;

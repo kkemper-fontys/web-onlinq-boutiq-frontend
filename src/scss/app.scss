@@ -1,11 +1,16 @@
 // 3rd party Libraries
 @import '~breakpoint-sass/stylesheets/_breakpoint.scss';
 
+$fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';
+
 // Font Awesome
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/regular';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/brands';
+@import '~@fortawesome/fontawesome-pro/scss/fontawesome';
+@import '~@fortawesome/fontawesome-pro/scss/thin';
+@import '~@fortawesome/fontawesome-pro/scss/light';
+@import '~@fortawesome/fontawesome-pro/scss/duotone';
+@import '~@fortawesome/fontawesome-pro/scss/duotone-icons';
+@import '~@fortawesome/fontawesome-pro/scss/regular';
+@import '~@fortawesome/fontawesome-pro/scss/solid';
 
 // General Variables
 @import "vars";
@@ -16,3 +21,5 @@
 // Stylesheets
 @import "menu";
 @import "breadcrumbs";
+@import "navigation";
+@import "tags";
