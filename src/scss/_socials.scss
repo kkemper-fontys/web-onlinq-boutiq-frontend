@@ -1,0 +1,15 @@
+.socials {
+  display: flex;
+  flex-wrap: nowrap;
+  margin-top: 30px;
+
+  .icon {
+    color: $primary;
+    margin-right: 25px;
+    font-size: 1rem;
+
+    &:hover {
+      color: $secondary;
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import {useFetch} from "../../hooks/use-fetch";
+import {useFetch} from "../../../hooks/use-fetch";
 import {useEffect, useState} from "react";
 
 function Tags() {

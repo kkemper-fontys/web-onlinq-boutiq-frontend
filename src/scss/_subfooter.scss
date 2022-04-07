@@ -1,0 +1,25 @@
+.subfooter {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  background: $black;
+  padding: 30px 100px;
+
+  &-item {
+    position: relative;
+    font-family: $font-primary;
+    font-size: 0.875rem;
+    color: $gray-300;
+    margin: 0px 25px;
+    cursor: pointer;
+  }
+
+  &-bullit {
+    width: 8px;
+    height: 8px;
+    background: $secondary;
+    border-radius: 10px;
+    margin: 10px 0 0 0;
+  }
+}

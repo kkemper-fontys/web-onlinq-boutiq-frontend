@@ -11,6 +11,7 @@ $fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';
 @import '~@fortawesome/fontawesome-pro/scss/duotone-icons';
 @import '~@fortawesome/fontawesome-pro/scss/regular';
 @import '~@fortawesome/fontawesome-pro/scss/solid';
+@import "~@fortawesome/fontawesome-pro/scss/brands";
 
 // General Variables
 @import "vars";
@@ -24,3 +25,9 @@ $fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';
 @import "navigation";
 @import "tags";
 @import "price";
+@import "sale";
+@import "products";
+
+@import "footer";
+@import "subfooter";
+@import "socials";
