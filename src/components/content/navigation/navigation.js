@@ -4,15 +4,11 @@ import Sale from "./sale";
 
 const Navigation = () => {
     return (
-        <section>
-            <div className={"container"}>
-                <div className={"navigation"}>
-                    <Tags />
-                    <Price />
-                    <Sale />
-                </div>
-            </div>
-        </section>
+        <div className={"navigation"}>
+            <Tags/>
+            <Price/>
+            <Sale/>
+        </div>
     );
 }
 

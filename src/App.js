@@ -1,8 +1,8 @@
 import './scss/app.scss';
 import Menu from "./components/menu/menu";
 import Breadcrumbs from "./components/breadcrumbs/breadcrumbs";
-import Navigation from "./components/content/navigation/navigation";
 import Footer from "./components/footer/footer";
+import Content from "./components/content/content";
 
 
 function App() {
@@ -10,7 +10,7 @@ function App() {
         <div className="App">
             <Menu />
             <Breadcrumbs />
-            <Navigation />
+            <Content />
             <Footer />
         </div>
     );

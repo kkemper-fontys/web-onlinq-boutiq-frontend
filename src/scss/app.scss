@@ -1,9 +1,9 @@
 // 3rd party Libraries
 @import '~breakpoint-sass/stylesheets/_breakpoint.scss';
 
+// Font Awesome
 $fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';
 
-// Font Awesome
 @import '~@fortawesome/fontawesome-pro/scss/fontawesome';
 @import '~@fortawesome/fontawesome-pro/scss/thin';
 @import '~@fortawesome/fontawesome-pro/scss/light';
@@ -20,14 +20,20 @@ $fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';
 @import "webfonts";
 
 // Stylesheets
+// Topper Styling sheets
 @import "menu";
 @import "breadcrumbs";
-@import "navigation";
-@import "tags";
-@import "price";
-@import "sale";
-@import "products";
 
+// Content Styling sheets
+@import "content";
+  @import "navigation";
+    @import "tags";
+    @import "price";
+    @import "sale";
+  @import "products";
+    @import "product";
+
+// Footer Styling sheets
 @import "footer";
-@import "subfooter";
-@import "socials";
+  @import "socials";
+  @import "subfooter";
