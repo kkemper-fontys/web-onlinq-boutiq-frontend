@@ -3,6 +3,7 @@ const Product = () => {
         <div className={"product"}>
             <div className={"product-image"}>
                 <img src={"images/products/bbqsalt.jpg"} />
+                <div className={"badge product-image-sale"}>Sale</div>
             </div>
             <div className={"product-summary"}>
                 <div className={"product-summary-tag"}>BBQ kruiden</div>
