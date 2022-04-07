@@ -1,0 +1,35 @@
+.searchbar {
+  width: 100%;
+  margin-bottom: 50px;
+
+  &-wrapper {
+    width: 100%;
+    display:inline-block;
+    position: relative;
+
+    &:after {
+      font-family: 'Font Awesome 6 Pro', sans-serif;
+      content: '\f002';
+      position: absolute;
+      right: 25px;
+      top: 10px;
+      font-size: 0.8125rem;
+
+    }
+  }
+  input[type=text] {
+    background: $gray-100;
+    width: 100%;
+    font-family: $font-primary;
+    font-size: 0.8125rem;
+    padding: 15px 25px;
+    //
+    //&:after {
+    //  content: '\f002';
+    //  font-family: "Font Awesome 5 Pro", sans-serif;
+    //  position: absolute;
+    //  right: 0;
+    //  top: 0;
+    //}
+  }
+}
