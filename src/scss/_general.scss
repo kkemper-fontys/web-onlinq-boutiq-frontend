@@ -261,6 +261,18 @@ a {
     }
 }
 
+.spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+
+    > i {
+        animation: spin infinite 3s;
+    }
+}
+
 .badge {
     padding: .625rem  1.25rem !important;
     font-size: 0.75rem;

@@ -31,14 +31,17 @@ const Price = () => {
     const MAX = 100;
     const [values, setValues] = useState([0, 100]);
 
+    const mouseUpHandler = () => {
+        console.log('muis losgelaten!');
+    }
     return (
         <>
             <h4>Prijs</h4>
             <div className={"price"}>
                 <div className={"price-range"}>
-                    <input className={"currency"} type={"number"} name={"price_from"} step={1} min={0} value={values[0]} onChange={(value) => {console.log(value)}}/>
+                    <input className={"currency"} type={"number"} name={"price_from"} step={1} min={0} value={values[0]} onChange={(value) => { setValues((prevValue) => [value.target.value, prevValue[1]])}} />
                     <p>tot</p>
-                    <input className={"currency"} type={"number"} name={"price_to"} step={1} min={0} value={values[1]} onChange={(value) => {console.log(value)}}/>
+                    <input className={"currency"} type={"number"} name={"price_to"} step={1} min={0} value={values[1]} onChange={(value) => { setValues((prevValue) => [prevValue[0], value.target.value])}}/>
                 </div>
                 <Range
                     values={values}
@@ -52,6 +55,7 @@ const Price = () => {
                         <div
                             onMouseDown={props.onMouseDown}
                             onTouchStart={props.onTouchStart}
+                            onMouseUp={mouseUpHandler}
                             style={{
                                 ...props.style,
                                 height: "50px",

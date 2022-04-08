@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <>
             <div>
-                <img className={"footer-logo"} src={'images/logo.png'}/>
+                <img className={"footer-logo"} src={'/images/logo.png'}/>
             </div>
             <section className={"footer"}>
                 <div className={"container"}>

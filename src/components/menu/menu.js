@@ -6,7 +6,7 @@ const Menu = () => {
             <a className={"menu-item"}>Producten</a>
             <a className={"menu-item"}>Recepten</a>
             <a className={"menu-item"}>Contact</a>
-            <img className={"menu-logo"} src={'images/logo.png'}/>
+            <img className={"menu-logo"} src={'/images/logo.png'}/>
         </div>
     );
 }
