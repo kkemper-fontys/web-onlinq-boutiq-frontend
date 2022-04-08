@@ -1,0 +1,110 @@
+.productdetail {
+
+  &-wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+
+  &-image {
+    width: 50%;
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+    }
+  }
+
+  &-info {
+    position: relative;
+    width: 50%;
+    padding-left: 150px;
+
+    &-wrapper {
+      display: flex;
+      flex-wrap: nowrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+
+    &-line {
+      height: 0;
+      border-top: 1px solid $gray-100;
+      margin: 30px 0;
+    }
+
+    &-amount {
+      margin-top: 0;
+      width: 90px;
+      text-align: center;
+      padding-left: 25px !important;
+      margin-left: -25px;
+
+      &-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-between;
+
+        p {
+          width: 90px;
+        }
+      }
+    }
+
+    &-total {
+      margin-top: 25px;
+      display: flex;
+      flex-wrap: nowrap;
+
+      p {
+        width: 90px;
+      }
+    }
+
+    &-tag {
+      font-family: $font-secondary;
+      font-weight: bold;
+      font-size: 1rem;
+      line-height: 2rem;
+      color: $primary;
+    }
+
+    &-title {
+      font-family: $font-secondary;
+      font-weight: 300;
+      font-size: 1.5rem;
+      line-height: 2.25rem;
+      color: $gray-400;
+      margin-bottom: 37px;
+    }
+
+    &-price {
+      font-family: $font-primary;
+      font-size: 1.125rem;
+      line-height: 1.375rem;
+      font-weight: bold;
+      color: $gray-400;
+
+      &-wrapper {
+        display: flex;
+        flex-wrap: nowrap;
+        align-items: center;
+
+        p {
+          width: 90px;
+        }
+      }
+    }
+
+    &-cart {
+      margin-top: 50px;
+    }
+  }
+}
