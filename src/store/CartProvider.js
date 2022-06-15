@@ -93,17 +93,28 @@ const cartReducer = (state, action) => {
 
     if(action.type === 'ADDCOUPON'){
         let updatedCoupons;
-        if(!state.coupons || state.coupons.length === 0){
-            updatedCoupons = [action.coupon];
+        let oldCoupons = state.coupons;
+        if(oldCoupons.filter(e => e.id === action.coupon.id)[0]){
+            return {
+                items: state.items,
+                totalAmount: state.totalAmount,
+                coupons: state.coupons,
+                subtotal: state.subtotal,
+                total: state.total
+            }
         } else {
-            updatedCoupons = [...state.coupons, action.coupon];
-        }
-        return {
-            items: state.items,
-            totalAmount: state.totalAmount,
-            coupons: updatedCoupons,
-            subtotal: state.subtotal,
-            total: state.total
+            if(!state.coupons || state.coupons.length === 0){
+                updatedCoupons = [action.coupon];
+            } else {
+                updatedCoupons = [...state.coupons, action.coupon];
+            }
+            return {
+                items: state.items,
+                totalAmount: state.totalAmount,
+                coupons: updatedCoupons,
+                subtotal: state.subtotal,
+                total: state.total
+            }
         }
     }
 

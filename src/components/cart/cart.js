@@ -40,7 +40,7 @@ const Cart = () => {
             setCouponStatus("error");
         } else {
             const data = await fetchData(`api/coupons.json`, "GET", {}, `?code=${oldCoupon}`);
-            const coupon = Object.assign({}, data[0]);
+            const coupon = await Object.assign({}, data[0]);
             if (Object.keys(coupon).length === 0) {
                 setCouponErrorMessage("Code bestaat niet!");
                 setCouponStatus("error");
@@ -56,25 +56,28 @@ const Cart = () => {
                     setCouponStatus("error");
                 } else if (timesUsable === 0 || timesUsed < timesUsable) {
                     setCouponErrorMessage("");
-                    setCouponStatus("success")
-                    setCoupons([...coupons, coupon]);
+                    setCouponStatus("success");
+                    setCoupons((oldValue) => [...oldValue, coupon]);
                     cartCtx.addCoupon(coupon);
                 }
             }
         }
     }
+
     // THIS FUNCTION CHECKS IF COUPON CAN STILL BE USED WHEN AN ITEM IS REMOVED FROM THE CART
-    const checkCouponsOnItemRemove = () => {
+    const checkCouponsOnItemRemove = async () => {
         let couponAmount = 0;
-        cartCtx.coupons.map((coupon) => {
+        await cartCtx.coupons.map((coupon) => {
             return couponAmount += +coupon.priceReduction
         });
-
-        if ((cartCtx.totalAmount - couponAmount) < 0) {
-            setCouponErrorMessage("Couponwaarde is hoger dan het te betalen bedrag, coupons verwijderd");
-            setCouponStatus("error");
-            setCoupons([]);
-            localStorage.setItem('coupons', JSON.stringify([]));
+        const localStorageCoupons = await localStorage.getItem('coupons');
+        if (JSON.parse(localStorageCoupons).length > 0) {
+            if ((cartCtx.totalAmount - couponAmount) < 0) {
+                setCouponErrorMessage("Couponwaarde is hoger dan het te betalen bedrag, coupons verwijderd");
+                setCouponStatus("error");
+                setCoupons([]);
+                localStorage.setItem('coupons', JSON.stringify([]));
+            }
         }
     }
 
@@ -111,10 +114,12 @@ const Cart = () => {
                         setCouponErrorMessage("Couponwaarde te hoog voor deze winkelmand");
                         setCouponStatus("error");
                     } else {
+                        let tempCoupons = [...coupons, coupon];
                         setCouponErrorMessage("");
                         setCouponStatus("success")
                         setCoupons([...coupons, coupon]);
-                        cartCtx.addCoupon(coupon);
+                        await cartCtx.addCoupon(coupon);
+                        await addCouponToStorage(tempCoupons);
                     }
                 }
             }
@@ -122,25 +127,9 @@ const Cart = () => {
         couponRef.current.value = "";
     }
 
-    // THIS EFFECTS TAKES PLACE ON PAGE ENTER AND CHECKS IF THERE ARE COUPONS IN THE CART CONTEXT
-    useEffect(() => {
-        if (cartCtx.coupons.length > 0) {
-            setCoupons(cartCtx.coupons);
-        }
-    }, []);
-
-    // THIS EFFECT TAKES PLACE WHEN THE TOTALAMOUNT CHANGES AND CHECKS IF THE COUPONS ARE STILL VALID
-    useEffect(() => {
-        checkCouponsOnItemRemove();
-    }, [totalAmount]);
-
-    // THIS EFFECT TAKES PLACE WHEN THE COUPONS CHANGE IN THE CART CONTEXT AND SETS THEM AS A COOKIE
-    useEffect(() => {
-        if (isInitiallyFetched) {
-            localStorage.setItem('coupons', JSON.stringify(cartCtx.coupons));
-        }
-    }, [cartCtx.coupons]);
-
+    const addCouponToStorage = async (tempCoupons) => {
+        await localStorage.setItem('coupons', JSON.stringify(tempCoupons));
+    };
 
     // THIS EFFECT TAKES PLACE WHEN THE COUPONS OR TOTALAMOUNT CHANGES AND SETS THE NEW TOTAL AND SUBTOTAL
     useEffect(() => {
@@ -154,6 +143,7 @@ const Cart = () => {
                 percentage += coupon.percentageReduction;
             }
         });
+        checkCouponsOnItemRemove().then();
         setSubTotal(((totalAmount * ((100 - percentage) / 100) - amount) / 100));
         setTotal(((totalAmount * ((100 - percentage) / 100) + shippingCost - amount) / 100));
     }, [coupons, totalAmount]);
@@ -177,13 +167,13 @@ const Cart = () => {
     }
 
     // HANDLES THE '-' BUTTON
-    const cartItemRemoveHandler = (id) => {
-        cartCtx.removeItem(id);
+    const cartItemRemoveHandler = async (id) => {
+        await cartCtx.removeItem(id);
     }
 
     // HANDLES THE 'DELETE' BUTTON
-    const cartItemDeleteHandler = (id) => {
-        cartCtx.deleteItem(id);
+    const cartItemDeleteHandler = async (id) => {
+        await cartCtx.deleteItem(id);
     }
 
     return (
@@ -199,11 +189,11 @@ const Cart = () => {
                                         <img src={"/images/products/bbqsalt.jpg"}/>
                                     </div>
                                 </Link>
-                                <Link to={`/productDetail/${item.id}`}>
+                                <Link to={`/productDetail/${item.id}`} className={"cart-content-items-item-value"}>
                                     <div className={"wrapper"}>
                                         <div className={"cart-content-items-item-product"}>
                                             <div className={"cart-content-items-item-product-tag"}>
-                                                BBQ kruiden
+                                                {item.subtitle}
                                             </div>
                                             <div className={"cart-content-items-item-product-name"}>
                                                 {item.name}
@@ -323,7 +313,7 @@ const Cart = () => {
                     {numberOfCartItems === 0 &&
                     <div className={"cart-content-info"}>
                         <Link to={"/"}>
-                            <button className={"btn cart-content-info-toshop"}>Verder winkelen</button>
+                            <button className={"btn cart-content-info-toshop single"}>Verder winkelen</button>
                         </Link>
                     </div>
                     }

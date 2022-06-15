@@ -3,6 +3,7 @@ import CartContext from "../../store/cart-context";
 import {Link} from "react-router-dom";
 
 const Menu = () => {
+    const [animate, setAnimate] = useState(false);
     const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
     const cartCtx = useContext(CartContext);
 
@@ -25,6 +26,14 @@ const Menu = () => {
 
     }, []);
 
+    useEffect(() => {
+        setAnimate(true);
+        setTimeout(() => {
+           setAnimate(false);
+       }, 150)
+
+    }, [numberOfCartItems]);
+
     // THIS EFFECT TAKES PLACE WHEN AN ITEM IS PUT INTO THE CART AND SETS IT TO A COOKIE
     useEffect(() => {
         if (isInitiallyFetched) {
@@ -46,7 +55,7 @@ const Menu = () => {
                     <div className={"menu-cart-holder"}>
                         <i className="icon fa-light fa-basket-shopping"/>
                     </div>
-                    <div className={"menu-cart-badge"}>
+                    <div className={`menu-cart-badge ${animate ? "animate" : ""}`}>
                         <div className={"menu-cart-badge-amount"}>{numberOfCartItems}</div>
                     </div>
                 </div>

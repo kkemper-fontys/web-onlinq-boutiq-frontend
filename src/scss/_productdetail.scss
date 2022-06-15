@@ -3,34 +3,91 @@
 
   &-wrapper {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     position: relative;
-    flex-direction: column;
+    margin: -15px;
 
-    @include breakpoint($breakpoint-m){
-      flex-direction: row;
+    @include breakpoint($breakpoint-m) {
+      margin: -75px;
     }
   }
 
   &-image {
-    width: 100%;
+    width: calc(100% - 30.1px);
+    margin: 15px;
+
+    @include breakpoint($breakpoint-m) {
+      width: calc(40% - 150.1px);
+      margin: 75px;
+    }
 
     img {
       width: 100%;
       height: auto;
       border-radius: 10px;
     }
+
+    &-slider {
+
+      &-main {
+
+      }
+
+      &-nav {
+
+        .slick {
+
+          &-list {
+            margin: -5px;
+          }
+
+          &-track {
+            display: flex;
+            align-items: center;
+            margin: 0;
+          }
+
+          &-slide {
+            opacity: .5;
+            margin: 5px;
+
+            > div {
+              position: relative;
+              width: 100%;
+              height: 0;
+              padding-bottom: 100%;
+              overflow: hidden;
+
+              img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center;
+              }
+            }
+          }
+
+          &-current {
+            opacity: 1;
+          }
+        }
+      }
+    }
   }
 
   &-info {
     position: relative;
-    width: 100%;
     padding-left: 0;
-    margin-top: 25px;
 
-    @include breakpoint($breakpoint-m){
-      padding-left: 150px;
-      margin-top: 0;
+    width: calc(100% - 30.1px);
+    margin: 15px;
+
+    @include breakpoint($breakpoint-m) {
+      width: calc(60% - 150.1px);
+      margin: 75px;
     }
 
     &-wrapper {

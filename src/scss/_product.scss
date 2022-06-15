@@ -22,14 +22,22 @@
   &-image {
     display: block;
     width: 100%;
-    height: auto;
+    height: 0;
+    padding-bottom: 56.25%;
     border-bottom: 2px solid $primary;
+    border-radius: 10px 10px 0 0;
+    position: relative;
+    overflow: hidden;
 
     img {
-      height: auto;
-      max-width: 100%;
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+      object-position: center;
       display: block;
-      border-radius: 10px 10px 0 0;
     }
 
     &-sale {
@@ -49,10 +57,31 @@
       right: 15px;
       bottom: 10px;
 
+      .fill {
+        fill: $gray-100;
+        transition: $transition-options;
+      }
+
+      .fillBetween {
+        fill: $white;
+      }
+
       .icon {
         position: absolute;
         top: calc(50% - 12px);
         left: calc(50% - 9px);
+        color: $gray-300;
+        transition: $transition-options;
+      }
+
+      &:hover {
+        .fill {
+          fill: $primary;
+        }
+
+        .icon {
+          color: $white;
+        }
       }
     }
 

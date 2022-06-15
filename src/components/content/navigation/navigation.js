@@ -36,10 +36,12 @@ const Navigation = (props) => {
         <>
             <div className={"topbar"}><p>Filters</p><i onClick={showFiltersHandler} className="fa-solid fa-sliders-up" /></div>
             <div className={`navigation ${showFilters}`}>
-                <Searchbar searchHandler={searchFilterHandler}/>
-                <Tags tagFilter={tagFilterHandler}/>
-                <Price maxValue={props.maxValue} minValue={props.minValue} setPriceRange={priceRangeChangeHandler}/>
-                <Sale sale={filterSaleHandler}/>
+                <div className={'navigation-wrapper'}>
+                    <Searchbar searchHandler={searchFilterHandler}/>
+                    <Tags tagFilter={tagFilterHandler}/>
+                    <Price maxValue={props.maxValue} minValue={props.minValue} setPriceRange={priceRangeChangeHandler}/>
+                    <Sale sale={filterSaleHandler}/>
+                </div>
             </div>
         </>
     );

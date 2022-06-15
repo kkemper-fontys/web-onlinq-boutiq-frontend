@@ -40,10 +40,16 @@ const Price = (props) => {
     },[props.minValue, props.maxValue]);
 
     // THIS FUNCTION SENDS THE PRICE RANGE TO ITS PARENT WHEN THE MOUSE IS RELEASED
-    const mouseUpHandler = () => {
-        props.setPriceRange(values);
-        console.log(values);
-    }
+    useEffect(() => {
+        let timeOut = setTimeout(() => {
+            console.log(values);
+            props.setPriceRange(values);
+        }, 500);
+
+        return () => {
+            clearTimeout(timeOut);
+        }
+    }, [values]);
 
     return (
         <>
@@ -66,7 +72,6 @@ const Price = (props) => {
                         <div
                             onMouseDown={props.onMouseDown}
                             onTouchStart={props.onTouchStart}
-                            onMouseUp={mouseUpHandler}
                             style={{
                                 ...props.style,
                                 height: "50px",

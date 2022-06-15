@@ -41,12 +41,54 @@ const Checkout = () => {
     // STATES FOR THE ERROR MESSAGES
     const [zipcodeError, setZipcodeError] = useState(false);
     const [emailError, setEmailError] = useState(false);
+    const [couponErrorMessage, setCouponErrorMessage] = useState("");
+    const [couponStatus, setCouponStatus] = useState("");
 
     const [isInitiallyFetched, setIsInitiallyFetched] = useState(false);
+    // THIS FUNCTIONS CHECKS IF COUPONS USED IN AN OLD SESSION ARE STILL USABLE (AFTER REFRESHING THE PAGE)
 
+    const checkOldCouponHandler = async (oldCoupon) => {
+        let alreadyUsed = false;
+        coupons.map((coupon) => {
+            if (coupon.code.toLowerCase() === oldCoupon.toLowerCase()) {
+                alreadyUsed = true;
+            }
+        });
+
+        if (alreadyUsed) {
+            setCouponErrorMessage("Code nu al gebruikt");
+            setCouponStatus("error");
+        } else {
+            const data = await fetchData(`api/coupons.json`, "GET", {}, `?code=${oldCoupon}`);
+            const coupon = await Object.assign({}, data[0]);
+            if (Object.keys(coupon).length === 0) {
+                setCouponErrorMessage("Code bestaat niet!");
+                setCouponStatus("error");
+            } else {
+                const timesUsed = +coupon.timesUsed;
+                const timesUsable = +coupon.timesUsable;
+
+                if (coupon.length === 0) {
+                    setCouponErrorMessage("Geen goede code");
+                    setCouponStatus("error");
+                } else if (timesUsable !== 0 && timesUsed === timesUsable) {
+                    setCouponErrorMessage("Code al te vaak gebruikt");
+                    setCouponStatus("error");
+
+                } else if (timesUsable === 0 || timesUsed < timesUsable) {
+                    setCouponErrorMessage("");
+                    setCouponStatus("success");
+                    setCoupons((oldValue) => [...oldValue, coupon]);
+                    cartCtx.addCoupon(coupon);
+                }
+            }
+        }
+    }
     // THIS EFFECTS TAKES PLACE ON PAGE ENTER AND CHECKS IF THERE ARE COUPONS IN THE CART CONTEXT
     useEffect(() => {
-        setCoupons(cartCtx.coupons);
+        const tempCoupons = JSON.parse(localStorage.getItem('coupons'));
+        tempCoupons.map((coupon) => {checkOldCouponHandler(coupon.code)});
+        // setCoupons();
     }, []);
 
     // THIS EFFECT TAKES PLACE WHEN THE COUPONS CHANGES AND SETS THE NEW TOTAL AND SUBTOTAL
@@ -134,14 +176,26 @@ const Checkout = () => {
                 orderStatus: "Open",
                 total: (total * 100).toString(),
                 subtotal: (subTotal * 100).toString(),
+                OrderCoupon: [],
                 orderLines: []
             }
 
             const orderData = await fetchData(`api/orders`, 'POST', JSON.stringify(order));
             console.log(orderData);
+            cartCtx.coupons.map(async (coupon) => {
+                const couponLine = {
+                    masterOrder: orderData['@id'],
+                    coupon: "/api/coupons/" + coupon.id,
+                    priceReduction: coupon.priceReduction,
+                    percentageReduction: coupon.percentageReduction
+                }
+                const couponLineData = await fetchData(`api/order_coupons`, 'POST', JSON.stringify(couponLine));
+
+                console.log(couponLineData);
+            });
             cartCtx.items.map(async (item) => {
                 const orderLine = {
-                    product: "/api/products/"+item.id,
+                    product: "/api/products/" + item.id,
                     price: item.price,
                     amount: item.amount,
                     master: orderData['@id']
@@ -155,7 +209,10 @@ const Checkout = () => {
 
             const amount = (+orderData.total / 100).toFixed(2).toString();
             console.log(amount);
-            const paymentUrl = await fetchData(`mollie`, 'POST', JSON.stringify({orderId: orderData.id, amount: amount}));
+            const paymentUrl = await fetchData(`mollie`, 'POST', JSON.stringify({
+                orderId: orderData.id,
+                amount: amount
+            }));
             clearAllHandler();
             window.open(paymentUrl.url, '_self');
             console.log(paymentUrl);

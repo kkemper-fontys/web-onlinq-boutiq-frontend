@@ -1,6 +1,7 @@
 import {Link} from "react-router-dom";
 import {useContext} from "react";
 import CartContext from "../../../store/cart-context";
+import OrderButton from "../../svg/orderButton";
 
 const Product = (props) => {
 
@@ -13,6 +14,7 @@ const Product = (props) => {
         cartCtx.addItem({
             id: props.data.id,
             name: props.data.name,
+            subtitle: props.subtitle,
             amount: 1,
             price: props.data.pricePerUnit
         });
@@ -22,7 +24,12 @@ const Product = (props) => {
         <div className={"product"}>
             <Link to={`productDetail/${props.data.id}`}>
                 <div className={"product-image"}>
-                    <img src={"images/products/bbqsalt.jpg"}/>
+                    {props.data.images.length !== 0 &&
+                        <img src={`https://localhost:8000/uploads/files/${props.data.images[1]}`}/>
+                    }
+                    {props.data.images.length === 0  &&
+                        <img src={"/images/products/placeholder.jpg"}/>
+                    }
                     {props.data.onSale && <div className={"badge product-image-sale"}>Sale</div>}
                 </div>
                 <div className={"product-summary"}>
@@ -33,7 +40,7 @@ const Product = (props) => {
                 </div>
             </Link>
             <div className={"product-summary-cart"} onClick={clickHandler}>
-                <img src={"images/order-button.svg"}/>
+                <OrderButton/>
                 <i className="icon fa-solid fa-basket-shopping"/>
             </div>
         </div>

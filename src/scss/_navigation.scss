@@ -1,35 +1,37 @@
 .visible {
-  visibility: visible;
-  display: block;
+  max-height: 9999px;
+  transition: max-height cubic-bezier(1,0,1,0) .3s;
 }
 
 .hidden {
-  visibility: hidden;
-  display: none;
-  transition: $transition-options;
-
-  @include breakpoint($breakpoint-m){
-    visibility: visible;
-    display: block;
-  }
+  max-height: 0;
+  transition: max-height cubic-bezier(0,1,0,1) .3s;
 }
 
 .navigation {
   position: relative;
-  margin: -30px 15px 15px 15px;
+  margin: -15px 15px 15px 15px;
   width: calc(100% - 30.1px);
   border-radius: 0 0 10px 10px;
-  border: 1px solid #dfdfe8;
-  border-top: 0;
-  padding: 40px 25px 25px 25px;
+  overflow: hidden;
 
   @include breakpoint($breakpoint-m){
     margin: 15px;
     display: block;
     height: auto;
     width: calc(25% - 4px);
-    border: 0;
     padding: 0;
+    max-height: 9999px;
+  }
+
+  &-wrapper {
+    padding: 25px 25px 25px 25px;
+    border: 1px solid #dfdfe8;
+    border-top: 0;
+
+    @include breakpoint($breakpoint-m){
+      border: 0;
+    }
   }
 }
 
