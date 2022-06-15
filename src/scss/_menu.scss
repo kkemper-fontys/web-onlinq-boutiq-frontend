@@ -4,10 +4,58 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 32px 100px;
+  padding: 32px 32px;
   background: $black;
   border-bottom: 2px solid $primary;
+  align-items: center;
+  justify-content: right;
+  display: flex;
 
+  @include breakpoint($breakpoint-m){
+    justify-content: space-between;
+    padding: 32px 100px;
+  }
+
+  &-wrapper {
+    display: none;
+    visibility: hidden;
+
+    @include breakpoint($breakpoint-m){
+      display: block;
+      visibility: visible;
+    }
+  }
+
+  &-cart {
+    position: relative;
+    background: $gray-100;
+    border-radius: 50px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &-badge {
+      position: absolute;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 24px;
+      min-height: 24px;
+      max-height: 24px;
+      top: -10px;
+      right: -10px;
+      border-radius: 15px;
+      background: $primary;
+
+      &-amount {
+        color: $white;
+        font-size: 0.8125rem;
+      }
+    }
+  }
   &-item {
     font-size: .9375rem;
     font-weight: 800;
@@ -24,11 +72,17 @@
 
   &-logo {
     position: absolute;
-    width: 156px;
-    height: 178px;
-    margin-left: -78px;
+    width: 67px;
+    height: 75px;
+    margin-left: -33px;
     margin-top: 10px;
     left: 50%;
     top: 0;
+
+    @include breakpoint($breakpoint-m){
+      width: 156px;
+      height: 176px !important;
+      margin-left: -78px;
+    }
   }
 }

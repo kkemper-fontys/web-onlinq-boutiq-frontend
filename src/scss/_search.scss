@@ -1,6 +1,10 @@
 .searchbar {
   width: 100%;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
+
+  @include breakpoint($breakpoint-m){
+    margin-bottom: 50px;
+  }
 
   &-wrapper {
     width: 100%;

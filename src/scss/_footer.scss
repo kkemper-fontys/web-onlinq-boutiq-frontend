@@ -1,35 +1,65 @@
 .footer {
   position: relative;
   background: $gray-100;
-  padding: 150px 0;
+  padding: 25px 0;
   width: 100%;
   z-index: 9998;
   border-bottom: 2px solid $primary;
 
+  @include breakpoint($breakpoint-m){
+    padding: 150px 0;
+  }
+
   .container {
     display: flex;
     flex-wrap: nowrap;
+    flex-direction: column;
+
+    @include breakpoint($breakpoint-m){
+      flex-direction: row;
+    }
   }
 
   &-column {
-    width: 25%;
-    margin: 0 15px;
+    width: 100%;
+    margin: 0 0 15px 0;
+
+    @include breakpoint($breakpoint-m){
+      width: 25%;
+      margin: 0 15px;
+    }
 
     &:first-of-type {
-      margin: 0 15px 0 0;
+      margin: 0 0 15px 0;
+
+      @include breakpoint($breakpoint-m){
+        margin: 0 15px 0 0;
+      }
     }
 
     &:last-of-type {
-      margin: 0 0 0 15px;
+      margin: 0 0 15px 0;
+
+      @include breakpoint($breakpoint-m){
+        margin: 0 0 0 15px;
+      }
     }
   }
 
   &-logo {
     position: relative;
     z-index: 9999;
-    left: 100px;
-    width: 155px;
-    height: 175px;
-    margin-bottom: -88px;
+    left: 50%;
+    margin-left: -33px;
+    width: 67px;
+    height: 75px;
+    margin-bottom: -45px;
+
+    @include breakpoint($breakpoint-m){
+      left: 100px;
+      width: 155px;
+      height: 175px;
+      margin-bottom: -88px;
+    }
   }
 }

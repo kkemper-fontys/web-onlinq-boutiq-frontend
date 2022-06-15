@@ -1,19 +1,35 @@
 import {useFetch} from "../../../hooks/use-fetch";
 import {useEffect, useState} from "react";
 
-function Tags() {
+function Tags(props) {
     const {fetchData, loading} = useFetch();
     const [tags, setTags] = useState([]);
-    const clickTagHandler = async (id) => {
-        const data = await fetchData(`tags/${id}`);
-        console.log(data.description);
+    const [selectedTags, setSelectedTags] = useState([]);
+
+    // THIS FUNCTION CHECKS IF THE CLICKED TAG IS ALREADY HIGHLIGHTED, AND WILL DO THE OPPOSITE WITH IT
+    const clickTagHandler = (id) => {
+        if (!selectedTags.find((element) => element === id)) {
+            setSelectedTags(selectedTags => [...selectedTags, id]);
+        } else {
+            const newData = selectedTags.filter((element) => {
+                return element !== id;
+            });
+            setSelectedTags(newData);
+        }
     }
 
+    // THIS EFFECT TAKES PLACE WHEN THE TAG SELECTION CHANGES AND SENDS ITS DATA TO THE PARENT
+    useEffect(() => {
+        props.tagFilter(selectedTags);
+    }, [selectedTags]);
+
+    // THIS FUNCTION GETS THE TAG DATA FROM THE BACK-END
     const loadTags = async () => {
-        const data = await fetchData('tags');
+        const data = await fetchData('api/tags.json');
         setTags(data);
     }
 
+    // THIS EFFECT LOADS THE TAGS ON PAGE LOAD
     useEffect(loadTags, []);
 
     return (
@@ -25,9 +41,13 @@ function Tags() {
                         <i className={"fas fa-spinner fa-2x"}/>
                     </div>
                 )}
-                {!loading && tags.map((tag) => (
-                    <div className={"tag"} key={tag.id} onClick={() => clickTagHandler(tag.id)}>{tag.name}</div>
-                ))}
+                {!loading && tags.map((tag) => {
+                    let selected;
+                    if(selectedTags.find((element) => element === tag.id)){
+                        selected = "selected";
+                    }
+                    return <div className={`tag ${selected}`} key={tag.id} onClick={() => clickTagHandler(tag.id)}>{tag.name}</div>
+                })}
             </div>
         </>
     );

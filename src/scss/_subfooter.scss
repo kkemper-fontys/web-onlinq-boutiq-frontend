@@ -4,7 +4,15 @@
   display: flex;
   flex-wrap: nowrap;
   background: $black;
-  padding: 30px 100px;
+  padding: 25px;
+  flex-direction: column;
+  align-items: center;
+
+  @include breakpoint($breakpoint-m){
+    padding: 30px 100px;
+    flex-direction: row;
+    align-items: unset;
+  }
 
   &-item {
     position: relative;

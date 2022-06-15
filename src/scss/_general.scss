@@ -77,35 +77,50 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-    //TODO change for mobile
-
-    font-size: 1.11rem;
-    line-height: 1.5;
+    font-size: 2.625rem;
+    line-height: 2.625rem;
+    color: $white;
+    font-weight: 300;
+    text-transform: uppercase;
 
     @include breakpoint($breakpoint-m) {
-        font-size: 3rem;
-        line-height: 3.25rem;
+        font-size: 7.375rem;
+        line-height: 7.5rem;
     }
 }
 
-h2 {
-    //TODO change for mobile
-
-    font-size: 1.11rem;
-    line-height: 1.5;
+.subtitle {
+    font-size: 1.25rem;
+    line-height: 1.25rem;
+    color: $white;
+    font-weight: 600;
+    font-family: $font-secondary;
 
     @include breakpoint($breakpoint-m) {
         font-size: 2.5rem;
-        line-height: 3rem;
+        line-height: 2.5rem;
+    }
+}
+
+.subheading {
+    color: $primary;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.75rem;
+    line-height: 2.25rem;
+
+    @include breakpoint($breakpoint-m) {
+        font-size: 3rem;
+        line-height: 3.24rem;
     }
 }
 
 h3 {
-    //TODO change for mobile
-
-    font-size: 0.78rem;
+    font-size: 1.5rem;
     font-weight: 300;
-    line-height: normal;
+    line-height: 1.875rem;
 
     @include breakpoint($breakpoint-m) {
         font-size: 1.875rem;
@@ -114,28 +129,12 @@ h3 {
 }
 
 h4 {
-    //TODO change for mobile
-
-    font-size: 0.78rem;
-    line-height: 2rem;
+    font-size: 1.125rem;
+    line-height: 1.62rem;
 
     @include breakpoint($breakpoint-m) {
         font-size: 1.5rem;
         line-height: 2rem;
-    }
-}
-
-h5 {
-    //TODO change for mobile
-
-    font-size: 0.78rem;
-    line-height: normal;
-    color: $gray-400;
-    margin: 0;
-
-    @include breakpoint($breakpoint-m) {
-        font-size: 1.125rem;
-        line-height: 1.375rem;
     }
 }
 
@@ -185,7 +184,7 @@ ul {
 ol {
     counter-reset: counter-number;
 
-    li  {
+    li {
         margin-left: 20px;
         padding-left: 15px;
         counter-increment: counter-number;
@@ -199,7 +198,6 @@ ol {
 
     @extend %sibling-heading;
 }
-
 
 .container {
     position: relative;
@@ -229,13 +227,11 @@ a {
 }
 
 .btn, button {
-    //TODO: Change for mobile
-
-    padding: .625rem  1.25rem !important;
-    font-size: 0.75rem;
+    padding: 1rem 3.125rem !important;
+    font-size: 1rem;
+    line-height: 1rem;
     font-family: $font-secondary;
     font-weight: bold;
-    line-height: 1rem;
     border: 0;
     background: $primary;
     cursor: pointer;
@@ -243,17 +239,21 @@ a {
     color: $white;
     border-radius: 50px;
     transition: $transition-options;
-
-    @include breakpoint($breakpoint-m) {
-        padding: 1rem 3.125rem!important;
-        font-size: 1rem;
-        line-height: 1rem;
-    }
+    white-space: nowrap;
 
     &:hover {
-        //TODO: wachten op baaaaarno
         background: $secondary;
         color: $black;
+    }
+
+    &--secondary {
+        background: $secondary;
+        color: $black;
+
+        &:hover {
+            background: $primary;
+            color: $white;
+        }
     }
 
     &::after {
@@ -302,7 +302,7 @@ a {
     }
 }
 
-input[type=text], input[type=number] {
+input[type=text], input[type=number], input[type=tel], input[type=email] {
     border-radius: 50px;
     padding: 10px;
     border: 1px solid $gray-200;

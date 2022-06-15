@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Range, getTrackBackground} from "react-range";
 
+// THIS FUNCTIONS SETS A CURRENCY SYMBOL IN THE PRICE FILTER INPUT FIELD
 (function ($) {
     $.fn.currencyInput = function () {
         this.each(function () {
@@ -25,15 +26,25 @@ $(document).ready(function () {
     $('input.currency').currencyInput();
 });
 
-const Price = () => {
+const Price = (props) => {
     const STEP = 1;
-    const MIN = 0;
-    const MAX = 100;
+    const [minValue, setMinValue] = useState(0);
+    const [maxValue, setMaxValue] = useState(100);
     const [values, setValues] = useState([0, 100]);
 
+    // THIS EFFECT TAKES PLACE WHEN THE MINVALUE AND MAXVALUE OF THE PRODUCTS IS SEND THREW BY ITS PARENT
+    useEffect(() => {
+        setValues([props.minValue, props.maxValue]);
+        setMinValue(props.minValue);
+        setMaxValue(props.maxValue);
+    },[props.minValue, props.maxValue]);
+
+    // THIS FUNCTION SENDS THE PRICE RANGE TO ITS PARENT WHEN THE MOUSE IS RELEASED
     const mouseUpHandler = () => {
-        console.log('muis losgelaten!');
+        props.setPriceRange(values);
+        console.log(values);
     }
+
     return (
         <>
             <h4>Prijs</h4>
@@ -46,8 +57,8 @@ const Price = () => {
                 <Range
                     values={values}
                     step={STEP}
-                    min={MIN}
-                    max={MAX}
+                    min={minValue}
+                    max={maxValue}
                     onChange={values => {
                         setValues(values);
                     }}
@@ -74,8 +85,8 @@ const Price = () => {
                                     background: getTrackBackground({
                                         values,
                                         colors: ["#ccc", "#823557", "#ccc"],
-                                        min: MIN,
-                                        max: MAX
+                                        min: minValue,
+                                        max: maxValue
                                     }),
                                     alignSelf: "center"
                                 }}

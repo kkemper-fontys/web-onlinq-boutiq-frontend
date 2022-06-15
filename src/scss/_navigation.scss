@@ -1,5 +1,60 @@
+.visible {
+  visibility: visible;
+  display: block;
+}
+
+.hidden {
+  visibility: hidden;
+  display: none;
+  transition: $transition-options;
+
+  @include breakpoint($breakpoint-m){
+    visibility: visible;
+    display: block;
+  }
+}
+
 .navigation {
   position: relative;
-  width: calc(25% - 4px);
-  margin: 15px;
+  margin: -30px 15px 15px 15px;
+  width: calc(100% - 30.1px);
+  border-radius: 0 0 10px 10px;
+  border: 1px solid #dfdfe8;
+  border-top: 0;
+  padding: 40px 25px 25px 25px;
+
+  @include breakpoint($breakpoint-m){
+    margin: 15px;
+    display: block;
+    height: auto;
+    width: calc(25% - 4px);
+    border: 0;
+    padding: 0;
+  }
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  visibility: visible;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid #dfdfe8;
+  width: calc(100% - 30.1px);
+  padding: 15px 25px 15px 25px;
+  margin: 15px 15px 15px 15px;
+
+  i {
+    cursor: pointer;
+  }
+
+  p {
+    font-size: 1rem;
+    font-family: $font-primary;
+  }
+
+  @include breakpoint($breakpoint-m){
+    display: none;
+    visibility: hidden;
+  }
 }

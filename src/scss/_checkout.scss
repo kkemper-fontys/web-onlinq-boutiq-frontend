@@ -1,0 +1,138 @@
+.checkout {
+
+  &-plusbtn {
+    padding: 12px !important;
+    margin-left: 15px;
+    max-height: 37px;
+    height: 37px;
+    min-width: 37px;
+    font-size: 0.8125rem;
+    line-height: 0.8125rem;
+  }
+
+  &-minbtn {
+    padding: 12px !important;
+    margin-left: 15px;
+    max-height: 37px;
+    height: 37px;
+    min-width: 37px;
+    font-size: 0.8125rem;
+    line-height: 0.8125rem;
+    margin-right: 15px;
+    background: $white;
+    border: 1px solid $gray-200;
+    color: $black;
+  }
+
+  &-content {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: -15px;
+    flex-direction: column;
+
+    @include breakpoint($breakpoint-l){
+      flex-direction: row;
+    }
+
+    &-info {
+      margin: 15px;
+      position: relative;
+      width: calc(100% - 30.1px);
+      border-radius: 10px;
+      border: 1px solid #dfdfe8;
+      padding: 25px;
+
+      @include breakpoint($breakpoint-l){
+        width: calc(100% / 3);
+        padding: 50px;
+      }
+
+      &-order {
+        width: 100%;
+        margin-top: 50px;
+      }
+
+      &-toshop {
+        margin-top: 15px;
+        background: $white;
+        border: 1px solid $gray-200 !important;
+        color: $black;
+        width: 100%;
+      }
+
+      &-table {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+
+        &-coupon {
+          width: 100%;
+          background: $gray-100 !important;
+          font-size: 0.8125rem !important;
+          margin-bottom: 50px;
+        }
+
+        &-lineafter {
+          position: relative;
+          margin-bottom: 64px;
+
+          &:after {
+            content: "";
+            position: absolute;
+            bottom: -32px;
+            width: 100%;
+            border-bottom: 1px solid $gray-200;
+          }
+        }
+
+        &-linebefore {
+          position: relative;
+          margin-top: 64px;
+
+          &:after {
+            content: "";
+            position: absolute;
+            top: -32px;
+            width: 100%;
+            border-bottom: 1px solid $gray-200;
+          }
+        }
+
+
+        &-price {
+          font-weight: bold;
+        }
+
+        &-discountprice {
+          font-weight: bold;
+        }
+      }
+    }
+
+    &-naw {
+      margin: 15px;
+
+      &-data {
+        display: flex;
+        flex-wrap: wrap;
+        margin: -15px;
+
+        .error {
+          color: red;
+          font-size: 0.8125rem;
+          margin: 0 0 -15px 25px;
+        }
+
+        input[type=text], input[type=tel], input[type=email] {
+          background: $gray-100;
+          font-size: 0.8125rem;
+          margin: 5px 15px;
+
+          @include breakpoint($breakpoint-l){
+            margin: 15px;
+          }
+        }
+      }
+    }
+  }
+}

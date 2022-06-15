@@ -1,7 +1,11 @@
 .products {
   position: relative;
-  width: calc(75% - 4px);
   margin: 15px;
+  width: calc(100% - 30.1px);
+
+  @include breakpoint($breakpoint-m){
+    width: calc(75% - 4px);
+  }
 
   &-wrapper {
     position: relative;

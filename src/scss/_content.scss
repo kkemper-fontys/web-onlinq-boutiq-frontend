@@ -5,5 +5,10 @@
     display: flex;
     flex-wrap: nowrap;
     margin: -15px;
+    flex-direction: column;
+
+    @include breakpoint($breakpoint-m){
+      flex-direction: row;
+    }
   }
 }

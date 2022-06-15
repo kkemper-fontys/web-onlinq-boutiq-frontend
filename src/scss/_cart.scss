@@ -1,0 +1,289 @@
+.cart {
+  .error {
+    background: rgba(255,0,0,0.4) !important;
+    border: 1px solid red;
+  }
+
+  .errorMessage {
+    font-size: 0.8125rem;
+    line-height: 1rem;
+    margin-bottom: 5px;
+    color: red;
+  }
+
+  .success {
+    background: rgba(0,255,0,0.4) !important;
+    border: 1px solid green;
+  }
+
+  &-plusbtn {
+    padding: 12px !important;
+    margin-left: 15px;
+    max-height: 37px;
+    height: 37px;
+    min-width: 37px;
+    font-size: 0.8125rem;
+    line-height: 0.8125rem;
+  }
+
+  &-minbtn {
+    padding: 12px !important;
+    margin-left: 15px;
+    max-height: 37px;
+    height: 37px;
+    min-width: 37px;
+    font-size: 0.8125rem;
+    line-height: 0.8125rem;
+    margin-right: 15px;
+    background: $white;
+    border: 1px solid $gray-200;
+    color: $black;
+  }
+
+  &-content {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: -15px;
+    flex-direction: column;
+
+    @include breakpoint($breakpoint-m){
+      flex-direction: row;
+    }
+
+    &-info {
+      position: relative;
+      width: calc(100% - 30.1px);
+      border-radius: 10px;
+      border: 1px solid #dfdfe8;
+      margin: -15px 15px 15px 15px;
+      padding: 25px;
+
+      @include breakpoint($breakpoint-m){
+        width: calc(100% / 3);
+        padding: 50px;
+        margin: 15px;
+      }
+
+      &-order {
+        width: 100%;
+        margin-top: 25px;
+
+        @include breakpoint($breakpoint-l){
+          margin-top: 50px;
+        }
+      }
+
+      &-toshop {
+        margin-top: 15px;
+        background: $white;
+        border: 1px solid $gray-200 !important;
+        color: $black;
+        width: 100%;
+      }
+
+      &-table {
+        position: relative;
+        display: flex;
+        justify-content: space-between;
+
+        &-coupon {
+          width: 100%;
+          background: $gray-100 !important;
+          font-size: 0.8125rem !important;
+          margin-bottom: 50px;
+        }
+
+        &-lineafter {
+          position: relative;
+          margin-bottom: 32px;
+
+          @include breakpoint($breakpoint-l){
+            margin-bottom: 64px;
+          }
+
+          &:after {
+            content: "";
+            position: absolute;
+            bottom: -16px;
+            width: 100%;
+            border-bottom: 1px solid $gray-200;
+
+            @include breakpoint($breakpoint-l){
+              bottom: -32px;
+            }
+          }
+        }
+
+        &-linebefore {
+          position: relative;
+          margin-top: 32px;
+
+          @include breakpoint($breakpoint-l){
+            margin-top: 64px;
+          }
+
+          &:after {
+            content: "";
+            position: absolute;
+            top: -16px;
+            width: 100%;
+            border-bottom: 1px solid $gray-200;
+
+            @include breakpoint($breakpoint-l){
+              top: -32px;
+            }
+          }
+        }
+
+        &-price {
+          font-weight: bold;
+          margin-left: 0;
+
+          @include breakpoint($breakpoint-l){
+            margin-left: 50px;
+          }
+        }
+
+        &-discountprice {
+          font-weight: bold;
+        }
+      }
+    }
+
+    &-items {
+      position: relative;
+      width: calc(100% - 30.1px);
+      display: flex;
+      flex-direction: column;
+      margin: 15px;
+
+      @include breakpoint($breakpoint-l){
+        width: calc(100% / 3 * 2);
+      }
+
+      &-item {
+        position: relative;
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid #dfdfe8;
+        padding: 25px;
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        margin-bottom: 25px;
+
+        @include breakpoint($breakpoint-l){
+          padding: 30px;
+        }
+
+        .wrapper {
+          display: flex;
+          flex-wrap: nowrap;
+          align-items: start;
+          flex-direction: column;
+          justify-self: left;
+
+          @include breakpoint($breakpoint-l){
+            flex-direction: row;
+            align-items: center;
+          }
+        }
+
+        &-top {
+          align-items: flex-start;
+          flex-direction: column;
+          justify-content: flex-start;
+        }
+
+        &-image {
+          margin: -15px 15px -15px -15px;
+          height: 105px;
+          background-color: $black;
+          display: flex;
+          align-items: center;
+          border-radius: 10px;
+
+          @include breakpoint($breakpoint-l){
+            margin: 0;
+            height: auto;
+          }
+
+          img {
+            max-width: 105px;
+            height: auto;
+            border-radius: 0;
+
+            @include breakpoint($breakpoint-l){
+              border-radius: 15px;
+            }
+          }
+        }
+
+        &-product {
+
+          &-tag {
+            font-family: $font-secondary;
+            font-weight: bold;
+            font-size: 1rem;
+            color: $primary;
+          }
+
+          &-name {
+            font-family: $font-secondary;
+            font-size: 1rem;
+            line-height: 1.5rem;
+            color: $gray-400;
+            font-weight: bold;
+
+            @include breakpoint($breakpoint-l){
+              font-size: 1.5rem;
+              line-height: 2.25rem;
+            }
+          }
+        }
+
+        &-price {
+          font-weight: bold;
+          color: $black;
+          margin-left: 0;
+
+          @include breakpoint($breakpoint-l){
+            margin-left: 50px;
+          }
+        }
+
+        &-amount {
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+
+          @include breakpoint($breakpoint-l){
+            flex-wrap: nowrap;
+          }
+
+          &-delete {
+            margin-right: 0;
+            cursor: pointer;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 15px;
+
+            @include breakpoint($breakpoint-l){
+              width: auto;
+              margin-bottom: 0;
+              margin-right: 35px;
+
+            }
+          }
+
+          &-select {
+            max-width: 100px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,6 +1,5 @@
 .product {
   position: relative;
-  width: calc(33.3% - 30px);
   margin: 15px;
   max-height: 433px;
   box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.06);
@@ -8,6 +7,11 @@
   display: flex;
   flex-direction: column;
   transition: $transition-options;
+  width: calc(50% - 30.1px);
+
+  @include breakpoint($breakpoint-xl){
+    width: calc(33.3% - 30px);
+  }
 
   &:hover {
     transform: scale(1.01);
@@ -36,32 +40,9 @@
   }
 
   &-summary {
+    position: relative;
     padding: 30px;
-
-    &-tag {
-      font-family: $font-secondary;
-      font-weight: bold;
-      font-size: 1rem;
-      line-height: 2rem;
-      color: $primary;
-    }
-
-    &-title {
-      font-family: $font-secondary;
-      font-weight: 300;
-      font-size: 1.5rem;
-      line-height: 2.25rem;
-      color: $gray-400;
-      margin-bottom: 37px;
-    }
-
-    &-price {
-      font-family: $font-primary;
-      font-size: 1.125rem;
-      line-height: 1.375rem;
-      font-weight: bold;
-      color: $gray-400;
-    }
+    height: auto;
 
     &-cart {
       position: absolute;
@@ -72,6 +53,45 @@
         position: absolute;
         top: calc(50% - 12px);
         left: calc(50% - 9px);
+      }
+    }
+
+    &-tag {
+      font-family: $font-secondary;
+      font-weight: bold;
+      font-size: 0.8125rem;
+      line-height: 2rem;
+      color: $primary;
+
+      @include breakpoint($breakpoint-m){
+        font-size: 1rem;
+        line-height: 2rem;
+      }
+    }
+
+    &-title {
+      font-family: $font-secondary;
+      color: $gray-400;
+      margin-bottom: 37px;
+      font-size: 1rem;
+      line-height: 1.25rem;
+      font-weight: bold;
+
+      @include breakpoint($breakpoint-m){
+        font-size: 1.5rem;
+        line-height: 2.25rem;
+        font-weight: 300;
+      }
+    }
+
+    &-price {
+      font-family: $font-primary;
+      font-size: 1rem;
+      font-weight: bold;
+      color: $gray-400;
+
+      @include breakpoint($breakpoint-m){
+        font-size: 1.125rem;
       }
     }
   }
