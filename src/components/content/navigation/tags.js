@@ -6,7 +6,6 @@ function Tags(props) {
     const [tags, setTags] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
     const [hideTags, setHideTags] = useState(false);
-    const [hiddenTags, setHiddenTags] = useState([]);
 
     // THIS FUNCTION CHECKS IF THE CLICKED TAG IS ALREADY HIGHLIGHTED, AND WILL DO THE OPPOSITE WITH IT
     const clickTagHandler = (id) => {
@@ -62,7 +61,7 @@ function Tags(props) {
                                     onClick={() => clickTagHandler(tag.id)}>{tag.name}</div>
                     }
                 })}
-                {hiddenTags &&
+                {!loading &&
                 <div className={`tag main`} onClick={loadHiddenTags}>{hideTags ? "Laat alle tags zien" : "Verberg tags"}</div>
                 }
             </div>
