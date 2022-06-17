@@ -213,10 +213,10 @@
         &-image {
           margin: -15px 15px -15px -15px;
           height: 105px;
-          background-color: $black;
           display: flex;
           align-items: center;
           border-radius: 10px;
+          overflow: hidden;
 
           @include breakpoint($breakpoint-l){
             margin: 0;

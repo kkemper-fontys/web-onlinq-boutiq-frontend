@@ -24,6 +24,16 @@
     background: $secondary !important;
   }
 
+  .main {
+    background: $primary !important;
+    color: $white !important;
+  }
+
+  .hidden {
+    visibility: hidden;
+    display: none !important;
+  }
+
   .tag {
     padding: .625rem  1.25rem !important;
     font-size: 0.75rem;

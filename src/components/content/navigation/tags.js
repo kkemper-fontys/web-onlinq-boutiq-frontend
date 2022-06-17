@@ -5,6 +5,8 @@ function Tags(props) {
     const {fetchData, loading} = useFetch();
     const [tags, setTags] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
+    const [hideTags, setHideTags] = useState(false);
+    const [hiddenTags, setHiddenTags] = useState([]);
 
     // THIS FUNCTION CHECKS IF THE CLICKED TAG IS ALREADY HIGHLIGHTED, AND WILL DO THE OPPOSITE WITH IT
     const clickTagHandler = (id) => {
@@ -29,6 +31,10 @@ function Tags(props) {
         setTags(data);
     }
 
+    const loadHiddenTags = () => {
+        setHideTags(!hideTags);
+    }
+
     // THIS EFFECT LOADS THE TAGS ON PAGE LOAD
     useEffect(loadTags, []);
 
@@ -41,13 +47,24 @@ function Tags(props) {
                         <i className={"fas fa-spinner fa-2x"}/>
                     </div>
                 )}
-                {!loading && tags.map((tag) => {
+                {!loading && tags.map((tag, index) => {
                     let selected;
-                    if(selectedTags.find((element) => element === tag.id)){
+                    if (selectedTags.find((element) => element === tag.id)) {
                         selected = "selected";
                     }
-                    return <div className={`tag ${selected}`} key={tag.id} onClick={() => clickTagHandler(tag.id)}>{tag.name}</div>
+                    if (index < 5) {
+                        return <div className={`tag ${selected}`} key={tag.id}
+                                    onClick={() => clickTagHandler(tag.id)}>{tag.name}</div>
+                    }
+                    if (index >= 5) {
+                        //TODO TAGS VERBERGEN! 'hidden'
+                        return <div className={`tag ${selected} ${hideTags ? "hidden" : ""}`} key={tag.id}
+                                    onClick={() => clickTagHandler(tag.id)}>{tag.name}</div>
+                    }
                 })}
+                {hiddenTags &&
+                <div className={`tag main`} onClick={loadHiddenTags}>{hideTags ? "Laat alle tags zien" : "Verberg tags"}</div>
+                }
             </div>
         </>
     );

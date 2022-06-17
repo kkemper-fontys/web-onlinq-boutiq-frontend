@@ -14,9 +14,10 @@ const Product = (props) => {
         cartCtx.addItem({
             id: props.data.id,
             name: props.data.name,
-            subtitle: props.subtitle,
+            subtitle: props.data.subtitle,
+            images: props.data.images[1],
             amount: 1,
-            price: props.data.pricePerUnit
+            price: props.data.pricePerUnit,
         });
     }
 

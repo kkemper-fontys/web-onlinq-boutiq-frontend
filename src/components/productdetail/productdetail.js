@@ -44,13 +44,13 @@ const ProductDetail = () => {
 
     // THIS EFFECT TAKES PLACE ON PAGE LOAD AND LOADS THE PRODUCT DATA
     useEffect(loadData, []);
-
     // THIS FUNCTION ADDS THE NUMBER OF INPUT FIELD ITEMS OF PRODUCT TO THE CART
     const addToCart = (enteredAmount) => {
         cartCtx.addItem({
             id: productId,
             name: productData.name,
             subtitle: productData.subtitle,
+            images: productData.images[1],
             amount: enteredAmount,
             price: productData.pricePerUnit
         })

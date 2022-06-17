@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import React, {useContext, useEffect, useRef, useState} from "react";
 import CartContext from "../../store/cart-context";
 import {useFetch} from "../../hooks/use-fetch";
@@ -6,7 +6,9 @@ import {useFetch} from "../../hooks/use-fetch";
 const Checkout = () => {
     // SETTING UP GLOBAL STATES
     const {fetchData, loading} = useFetch();
+    const [ordering, setOrdering] = useState(false);
     const shippingCost = 750;
+    const navigate = useNavigate();
 
     // SETTING UP CART STATES
     const cartCtx = useContext(CartContext);
@@ -86,6 +88,9 @@ const Checkout = () => {
     }
     // THIS EFFECTS TAKES PLACE ON PAGE ENTER AND CHECKS IF THERE ARE COUPONS IN THE CART CONTEXT
     useEffect(() => {
+        if(cartCtx.items.length === 0 && JSON.parse(localStorage.getItem('cart')).length === 0 ){
+            navigate("/");
+        }
         const tempCoupons = JSON.parse(localStorage.getItem('coupons'));
         tempCoupons.map((coupon) => {checkOldCouponHandler(coupon.code)});
         // setCoupons();
@@ -153,10 +158,13 @@ const Checkout = () => {
     // THIS FUNCTIONS VALIDATES THE INPUT FIELDS WHEN FORM IS SUBMITTED AND MAKES THE ORDER PENDING
     const formSubmitHandler = async (event) => {
         event.preventDefault();
+        setOrdering(true);
         if (!validateZipcode(zipcodeInput.current.value)) {
             setZipcodeError(true);
+            setOrdering(false);
         } else if (!validateEmail(emailInput.current.value)) {
             setEmailError(true);
+            setOrdering(false);
         } else {
             setEmailError(false);
             setZipcodeError(false);
@@ -181,7 +189,6 @@ const Checkout = () => {
             }
 
             const orderData = await fetchData(`api/orders`, 'POST', JSON.stringify(order));
-            console.log(orderData);
             cartCtx.coupons.map(async (coupon) => {
                 const couponLine = {
                     masterOrder: orderData['@id'],
@@ -190,8 +197,6 @@ const Checkout = () => {
                     percentageReduction: coupon.percentageReduction
                 }
                 const couponLineData = await fetchData(`api/order_coupons`, 'POST', JSON.stringify(couponLine));
-
-                console.log(couponLineData);
             });
             cartCtx.items.map(async (item) => {
                 const orderLine = {
@@ -205,22 +210,28 @@ const Checkout = () => {
             });
 
             const orderUpdate = await fetchData(`api/orders/${orderData.id}`, 'PUT', JSON.stringify({orderStatus: "Payment pending"}));
-            console.log(orderUpdate);
 
             const amount = (+orderData.total / 100).toFixed(2).toString();
-            console.log(amount);
             const paymentUrl = await fetchData(`mollie`, 'POST', JSON.stringify({
                 orderId: orderData.id,
                 amount: amount
             }));
             clearAllHandler();
             window.open(paymentUrl.url, '_self');
-            console.log(paymentUrl);
+
+            // console.log(paymentUrl);
         }
     }
-
     return (
         <section className={"checkout"}>
+            {ordering && (
+                <div className={"checkout-overlay"}>
+                    <h4>Uw bestelling wordt verwerkt</h4>
+                    <div className={"spinner"}>
+                        <i className={"fas fa-spinner fa-2x"}/>
+                    </div>
+                </div>
+            )}
             <form onSubmit={formSubmitHandler}>
                 <div className={"container"}>
                     <div className={"checkout-content"}>

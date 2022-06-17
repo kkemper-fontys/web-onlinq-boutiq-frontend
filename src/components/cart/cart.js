@@ -186,7 +186,12 @@ const Cart = () => {
                             <div key={item.id} className={"cart-content-items-item"}>
                                 <Link to={`/productDetail/${item.id}`}>
                                     <div className={"cart-content-items-item-image"}>
-                                        <img src={"/images/products/bbqsalt.jpg"}/>
+                                        {item.images !== undefined &&
+                                        <img src={`https://localhost:8000/uploads/files/${item.images}`}/>
+                                        }
+                                        {item.images === undefined  &&
+                                        <img src={"/images/products/placeholder.jpg"}/>
+                                        }
                                     </div>
                                 </Link>
                                 <Link to={`/productDetail/${item.id}`} className={"cart-content-items-item-value"}>

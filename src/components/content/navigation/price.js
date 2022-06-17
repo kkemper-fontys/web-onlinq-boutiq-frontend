@@ -42,7 +42,6 @@ const Price = (props) => {
     // THIS FUNCTION SENDS THE PRICE RANGE TO ITS PARENT WHEN THE MOUSE IS RELEASED
     useEffect(() => {
         let timeOut = setTimeout(() => {
-            console.log(values);
             props.setPriceRange(values);
         }, 500);
 
