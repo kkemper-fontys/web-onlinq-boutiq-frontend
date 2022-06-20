@@ -57,12 +57,12 @@ function Tags(props) {
                     }
                     if (index >= 5) {
                         //TODO TAGS VERBERGEN! 'hidden'
-                        return <div className={`tag ${selected} ${hideTags ? "hidden" : ""}`} key={tag.id}
+                        return <div className={`tag ${selected} ${!hideTags ? "hidden" : ""}`} key={tag.id}
                                     onClick={() => clickTagHandler(tag.id)}>{tag.name}</div>
                     }
                 })}
                 {!loading &&
-                <div className={`tag main`} onClick={loadHiddenTags}>{hideTags ? "Laat alle tags zien" : "Verberg tags"}</div>
+                <div className={`tag main`} onClick={loadHiddenTags}>{!hideTags ? "Laat alle tags zien" : "Verberg tags"}</div>
                 }
             </div>
         </>
